@@ -1,12 +1,59 @@
+/* eslint-disable default-case */
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux';
+import allReducers from './reducers';
+import { Provider } from 'react-redux';
+
+const myStore = createStore(
+  allReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()  
+);
+// // STORE --> Globalized State
+
+// // ACTION --> Increment, describes what you want to do
+// const increment = () => {
+//   return {
+//     type: 'INCREMENT'
+//   }
+// }
+
+// const decrement = () => {
+//   return {
+//     type: 'DECREMENT'
+//   }
+// }
+
+// // REDUCER --> check action and modify the state
+// const counter = (state = 0, action) => {
+//   switch (action.type) {
+//     case 'INCREMENT':
+//       return state + 1;
+//     case 'DECREMENT':
+//       return state - 1;
+//   } 
+// };
+
+// let store = createStore(counter);
+
+// // Display in console
+// store.subscribe(() => console.log(store.getState()));
+
+// // DISPATCH this action to the reducer
+// store.dispatch(increment());
+// store.dispatch(decrement());
+// store.dispatch(decrement());
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={myStore}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
